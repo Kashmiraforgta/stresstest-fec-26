@@ -1,7 +1,4 @@
-"""
-Phase 3 — Financial Impact Model
-Run: python src/impact_model.py
-"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
@@ -11,10 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from config import BANKS, FY24_ACTUALS, SCENARIOS, RBI_FLOORS, DSIB_BANKS, CHART_DIR
 
 os.makedirs(CHART_DIR, exist_ok=True)
-
-# ── Core stress engine ────────────────────────────────────────────────────────
 def compute_stressed(bank_key, scenario_key):
-    """Apply scenario shocks to FY24 actuals. Returns stressed dict."""
     base   = FY24_ACTUALS[bank_key].copy()
     shocks = SCENARIOS[scenario_key]
     car_floor = RBI_FLOORS["car_min_dsib"] if bank_key in DSIB_BANKS else RBI_FLOORS["car_min"]
@@ -34,8 +28,6 @@ def compute_stressed(bank_key, scenario_key):
     stressed["roa_negative"]= stressed["roa"]  < 0
     stressed["car_floor"]   = car_floor
     return stressed
-
-# ── Build full results table ─────────────────────────────────────────────────
 def build_results():
     rows = []
     for bkey in BANKS:
@@ -49,8 +41,6 @@ def build_results():
                 "roa_negative": s["roa_negative"],
             })
     return pd.DataFrame(rows)
-
-# ── Plots ────────────────────────────────────────────────────────────────────
 def plot_stressed_car(df):
     fig, axes = plt.subplots(1, 4, figsize=(16, 5), sharey=False)
     colors = {"Baseline":"#2196F3","Moderate_Stress":"#FF9800","Severe_Stress":"#F44336"}
@@ -83,8 +73,6 @@ def plot_stressed_gnpa(df):
     ax.legend(); ax.grid(axis="y", alpha=0.3)
     plt.tight_layout(); plt.savefig(f"{CHART_DIR}/stressed_gnpa.png", dpi=150); plt.close()
     print(f"Saved: {CHART_DIR}/stressed_gnpa.png")
-
-# ── Scorecard ────────────────────────────────────────────────────────────────
 def resilience_scorecard(df):
     """
     Simple composite score (0-100) per bank under severe stress.
@@ -96,11 +84,11 @@ def resilience_scorecard(df):
     for bkey in BANKS:
         row = severe.loc[bkey]
         s = 0
-        s += max(0, (9.0 - row["gnpa"]) * 5)           # lower GNPA → better
-        s += min(20, row["car"] * 1.2)                   # higher CAR → better
-        s += max(0, row["roa"] * 20)                     # positive ROA → better
-        s += min(15, row["nim"] * 3)                     # higher NIM = buffer
-        s += min(10, row["pcr"] / 10)                    # higher PCR = better
+        s += max(0, (9.0 - row["gnpa"]) * 5)          
+        s += min(20, row["car"] * 1.2)                  
+        s += max(0, row["roa"] * 20)                    
+        s += min(15, row["nim"] * 3)                    
+        s += min(10, row["pcr"] / 10)                    
         scores[bkey] = round(min(100, s), 1)
     ranked = sorted(scores.items(), key=lambda x: -x[1])
     print("\n" + "="*45)
@@ -111,8 +99,6 @@ def resilience_scorecard(df):
         print(f"  #{rank}  {bank:<10} ({t:<7})  Score: {score}/100")
     print("="*45)
     return scores
-
-# ── Main ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     df = build_results()
     df.to_csv("data/processed/stressed_results.csv", index=False)

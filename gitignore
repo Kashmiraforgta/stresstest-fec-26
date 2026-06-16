@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# outputs (charts and processed data are generated, not tracked)
+outputs/charts/
+data/processed/
+
+# keep raw data and source
+!data/raw/
+
+# Excel (too large / binary)
+*.xlsx
+
+# env
+.env

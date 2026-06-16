@@ -1,17 +1,15 @@
 
 STRESSTEST – Project File Index
 Finance & Economics Club · IIT Guwahati · DIY 2026
-=======================================================
 
 BANKS SELECTED
---------------
   PSU     : SBI (State Bank of India)
             Bank of Maharashtra (BoM)
   Private : HDFC Bank
             Kotak Mahindra Bank
 
 FILES IN THIS PACKAGE
-----------------------
+
 
 1. StressTest_BankDataset.xlsx
    → Master Excel workbook (7 sheets)
@@ -48,14 +46,12 @@ FILES IN THIS PACKAGE
    → Requires: pip install pandas matplotlib seaborn openpyxl
 
 PLOTS GENERATED (also embedded in Excel → Charts sheet)
----------------------------------------------------------
    plot_gnpa_trend.png       – GNPA % trajectory FY20–FY24
    plot_car_trend.png        – CAR % vs RBI minimum
    plot_roa_trend.png        – ROA % trajectory
    plot_fy24_comparison.png  – FY24 bar comparison (6 metrics)
 
 KEY METRICS TRACKED
--------------------
   GNPA %    Gross NPA / Gross Advances          (Asset Quality)
   NNPA %    Net NPA / Net Advances               (Asset Quality)
   NIM %     Net Interest Margin                  (Profitability)
@@ -66,20 +62,17 @@ KEY METRICS TRACKED
   PCR %     Provision Coverage Ratio             (Asset Quality)
 
 RBI REGULATORY FLOORS (for stress testing reference)
------------------------------------------------------
   Minimum CAR        : 9.0%
   Minimum Tier-1     : 7.0%
   D-SIB surcharge    : +0.20% (applies to HDFC Bank)
 
 DATA SOURCES
-------------
   SBI        : SBI Annual Reports FY20–FY24; IJSREM26618 (peer-reviewed)
   BoM        : ICRA Rating Report Jun 2024; Business Standard May 2023
   HDFC Bank  : HDFC 6-K SEC filings; toptradetrends FY24 analysis
   Kotak      : ICRA Rating Report Jun 2024; Business Standard quarterly
 
 NEXT STEP → Phase 2: Scenario Design
---------------------------------------
   Build assumption table for 3 scenarios:
     Scenario 1 (Baseline)       – FY24 actuals as starting point
     Scenario 2 (Moderate Stress)– COVID FY2020-21 shock parameters
@@ -88,4 +81,3 @@ NEXT STEP → Phase 2: Scenario Design
   Key shock variables to define:
     ΔGNPA (bps), ΔNIM (bps), ΔCAR (bps), ΔROA, credit cost multiplier
 
-=======================================================

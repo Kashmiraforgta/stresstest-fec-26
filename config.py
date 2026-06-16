@@ -1,4 +1,3 @@
-"""Central config — all constants and scenario parameters live here."""
 
 BANKS = {
     "SBI":   {"label": "State Bank of India",   "type": "PSU"},
@@ -7,7 +6,7 @@ BANKS = {
     "Kotak": {"label": "Kotak Mahindra Bank",   "type": "Private"},
 }
 
-# FY24 actuals (all in %)
+
 FY24_ACTUALS = {
     "SBI":   {"gnpa":2.24,"nnpa":0.57,"nim":3.28,"car":14.28,"tier1":10.36,"roa":1.04,"roe":20.32,"pcr":75.0},
     "BOM":   {"gnpa":1.88,"nnpa":0.20,"nim":3.60,"car":17.38,"tier1":14.50,"roa":1.24,"roe":20.10,"pcr":98.2},
@@ -15,7 +14,6 @@ FY24_ACTUALS = {
     "Kotak": {"gnpa":1.73,"nnpa":0.34,"nim":4.97,"car":21.80,"tier1":20.70,"roa":2.30,"roe":14.10,"pcr":75.0},
 }
 
-# Scenario shock assumptions (delta in pp)
 SCENARIOS = {
     "Baseline": {
         "gnpa_shock":0.0, "nim_shock":0.0, "car_shock":0.0,
@@ -31,15 +29,14 @@ SCENARIOS = {
     },
 }
 
-# RBI regulatory floors
 RBI_FLOORS = {
     "car_min":       9.0,
-    "car_min_dsib":  9.2,   # HDFC Bank D-SIB surcharge
+    "car_min_dsib":  9.2,   
     "tier1_min":     7.0,
     "pcr_guidance":  70.0,
 }
 
-DSIB_BANKS = ["HDFC"]  # banks with D-SIB surcharge
+DSIB_BANKS = ["HDFC"]  
 
 DATA_DIR    = "data/raw"
 PROC_DIR    = "data/processed"

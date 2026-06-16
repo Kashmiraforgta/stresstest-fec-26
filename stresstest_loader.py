@@ -1,12 +1,3 @@
-"""
-StressTest – Data Loader & Analysis Starter
-FEC · IIT Guwahati · DIY 2026
-------------------------------------------------------------
-Usage:
-    python stresstest_loader.py
-Requires:
-    pip install pandas matplotlib seaborn openpyxl
-"""
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -14,15 +5,11 @@ import matplotlib.ticker as mtick
 import seaborn as sns
 import warnings
 warnings.filterwarnings("ignore")
-
-# ── Load data ────────────────────────────────────────────────────────────────
 def load_data():
     """Returns two DataFrames: long-format and wide-format."""
     df_long = pd.read_csv("stresstest_master.csv")
     df_wide = pd.read_csv("stresstest_wide.csv")
     return df_long, df_wide
-
-# ── Quick summary ────────────────────────────────────────────────────────────
 def summary(df_wide):
     print("\n" + "="*60)
     print("  STRESSTEST – FY2024 SNAPSHOT (All 4 Banks)")
@@ -39,8 +26,6 @@ def summary(df_wide):
     print("  CAR (Basel III): 9.0%  |  Tier-1: 7.0%")
     print("  CAR (D-SIB like HDFC): 9.2% (0.2% surcharge)")
     print("="*60)
-
-# ── Plot: GNPA trend ─────────────────────────────────────────────────────────
 def plot_gnpa(df_wide):
     fig, ax = plt.subplots(figsize=(10, 5))
     colors = {"SBI":"#1B4332","BOM":"#2D6A4F","HDFC":"#1A3A5C","Kotak":"#2C5F8A"}
@@ -56,8 +41,6 @@ def plot_gnpa(df_wide):
     ax.yaxis.set_major_formatter(mtick.PercentFormatter())
     plt.tight_layout(); plt.savefig("plot_gnpa_trend.png", dpi=150); plt.close()
     print("Saved: plot_gnpa_trend.png")
-
-# ── Plot: CAR vs RBI minimum ─────────────────────────────────────────────────
 def plot_car(df_wide):
     fig, ax = plt.subplots(figsize=(10, 5))
     colors = {"SBI":"#1B4332","BOM":"#2D6A4F","HDFC":"#1A3A5C","Kotak":"#2C5F8A"}
@@ -71,8 +54,6 @@ def plot_car(df_wide):
     ax.yaxis.set_major_formatter(mtick.PercentFormatter())
     plt.tight_layout(); plt.savefig("plot_car_trend.png", dpi=150); plt.close()
     print("Saved: plot_car_trend.png")
-
-# ── Plot: ROA comparison ─────────────────────────────────────────────────────
 def plot_roa(df_wide):
     fig, ax = plt.subplots(figsize=(10, 5))
     colors = {"SBI":"#1B4332","BOM":"#2D6A4F","HDFC":"#1A3A5C","Kotak":"#2C5F8A"}
@@ -86,8 +67,6 @@ def plot_roa(df_wide):
     ax.yaxis.set_major_formatter(mtick.PercentFormatter())
     plt.tight_layout(); plt.savefig("plot_roa_trend.png", dpi=150); plt.close()
     print("Saved: plot_roa_trend.png")
-
-# ── Plot: FY24 radar / bar comparison ────────────────────────────────────────
 def plot_fy24_bar(df_wide):
     fy24 = df_wide[df_wide["year"]=="FY24"].set_index("bank_code")
     metrics = ["gnpa_pct","nim_pct","car_pct","roa_pct","roe_pct","pcr_pct"]
@@ -108,8 +87,6 @@ def plot_fy24_bar(df_wide):
     fig.suptitle("FY2024 Key Metrics – All 4 Banks Compared", fontsize=14, fontweight="bold")
     plt.tight_layout(); plt.savefig("plot_fy24_comparison.png", dpi=150); plt.close()
     print("Saved: plot_fy24_comparison.png")
-
-# ── Main ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     df_long, df_wide = load_data()
     summary(df_wide)
